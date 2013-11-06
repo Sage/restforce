@@ -16,6 +16,9 @@ module Restforce
 
     def on_complete(env)
       env[:body] = decompress(env[:body]) if gzipped?(env)
+      if env[:body].is_a?(String) and (env[:body].to_s == "\"OK\"")
+        env[:body] = "[{\"message\":\"You made it son\"}]"
+      end
     end
 
     # Internal: Returns true if the response is gzipped.
