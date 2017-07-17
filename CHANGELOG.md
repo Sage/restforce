@@ -1,3 +1,7 @@
+## 1.4.2
+
+*   SYG-660: Forcing to use TLS 1.2 on Salesforce calls
+
 ## 1.4.1 (Jun 18, 2013)
 
 *   Fixed a bug with HTTP 413 responses #75 @patronmanager

@@ -64,8 +64,11 @@ module Restforce
 
   private
     def faraday_options
-      { :url   => "https://#{@options[:host]}",
-        :proxy => @options[:proxy_uri] }.reject { |k, v| v.nil? }
+      {
+        url: "https://#{@options[:host]}",
+        proxy: @options[:proxy_uri],
+        ssl: { version: :TLSv1_2 }
+      }.reject { |_, v| v.nil? }
     end
   end
 end

@@ -4,7 +4,9 @@ describe Restforce::Middleware::Authentication do
   let(:options) do
     { :host => 'login.salesforce.com',
       :proxy_uri => 'https://not-a-real-site.com',
-      :authentication_retries => retries }
+      :authentication_retries => retries,
+      ssl: { version: :TLSv1_2 }
+    }
   end
 
   describe '.authenticate!' do
@@ -62,6 +64,10 @@ describe Restforce::Middleware::Authentication do
         its(:handlers) { should include FaradayMiddleware::ParseJson,
           Restforce::Middleware::Logger, Faraday::Adapter::NetHttp }
       end
+    end
+
+    it 'has SSL config set' do
+      expect(connection.ssl[:version]).to eq(:TLSv1_2)
     end
   end
 end
